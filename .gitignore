@@ -1,0 +1,16 @@
+# build output
+obj/
+bin/
+ce/obj/
+ce/bin/
+ce/src/farthunks.s
+host/host
+host/host_asan
+host/play
+*.dSYM/
+__pycache__/
+# local runs
+host/frames/
+host/save/
+host/save_play/
+.DS_Store

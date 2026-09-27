@@ -1,0 +1,76 @@
+# Intro panels, final panel and title logo -> UTINTRO AppVar (zx0 compressed).
+# room_area1's tiles and Frisk's sprites -> UTAREA1 AppVar (uncompressed, so
+# they are drawn straight from archive).
+# Images are pre-indexed by tools/convert_assets.py; pal.png pins every color
+# to the same palette index the C code fades.
+palettes:
+  - name: global_palette
+    fixed-entries:
+      - image: pal.png
+    images: automatic
+
+converts:
+  - name: panels
+    palette: global_palette
+    compress: zx0
+    width-and-height: false
+    images:
+      - intro0.png
+      - intro1.png
+      - intro2.png
+      - intro3.png
+      - intro4.png
+      - intro5.png
+      - intro6.png
+      - intro7.png
+      - intro8.png
+      - intro9.png
+      - intro10.png
+      - last0.png
+      - last1.png
+      - title.png
+
+  - name: area1
+    palette: global_palette
+    tilesets:
+      tile-width: 20
+      tile-height: 20
+      images:
+        - area1_tiles.png
+
+  - name: frisk
+    palette: global_palette
+    transparent-index: 14
+    images:
+      - frisk_d0.png
+      - frisk_d1.png
+      - frisk_d2.png
+      - frisk_d3.png
+      - frisk_r0.png
+      - frisk_r1.png
+      - frisk_u0.png
+      - frisk_u1.png
+      - frisk_u2.png
+      - frisk_u3.png
+      - frisk_l0.png
+      - frisk_l1.png
+
+outputs:
+  - type: appvar
+    name: UTINTRO
+    source-format: c
+    include-file: utintro.h
+    archived: true
+    palettes:
+      - global_palette
+    converts:
+      - panels
+
+  - type: appvar
+    name: UTAREA1
+    source-format: c
+    include-file: utarea1.h
+    archived: true
+    converts:
+      - area1
+      - frisk

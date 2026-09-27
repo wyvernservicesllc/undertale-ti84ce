@@ -1,0 +1,146 @@
+palettes:
+  - name: global_palette
+    fixed-entries:
+      - image: pal.png
+    images: automatic
+
+converts:
+  - name: flowey_tiles
+    palette: global_palette
+    tilesets:
+      tile-width: 20
+      tile-height: 20
+      images:
+        - flowey_tiles.png
+  - name: flowey_room_a
+    palette: global_palette
+    transparent-index: 14
+    images:
+      - flowey0.png
+      - flowey1.png
+      - floweygrow0.png
+      - floweygrow1.png
+      - floweygrow2.png
+      - floweygrow3.png
+      - floweygrow4.png
+      - floweygrow5.png
+      - floweygrow6.png
+      - floweygrow7.png
+      - floweygrow8.png
+      - toriel_d0.png
+      - toriel_d1.png
+      - toriel_d2.png
+      - toriel_d3.png
+  - name: flowey_room_b
+    palette: global_palette
+    transparent-index: 14
+    images:
+      - floweyshrink0.png
+      - floweyshrink1.png
+      - floweyshrink2.png
+      - floweyshrink3.png
+      - floweyshrink4.png
+      - floweyshrink5.png
+      - floweyshrink6.png
+      - floweyshrink7.png
+      - floweyshrink8.png
+      - floweysink0.png
+      - floweysink1.png
+      - floweysink2.png
+      - floweysink3.png
+      - floweysink4.png
+      - floweysink5.png
+      - floweylaughoverworld0.png
+      - floweylaughoverworld1.png
+      - floweylaughoverworld2.png
+  - name: flowey_battle_a
+    palette: global_palette
+    transparent-index: 14
+    images:
+      - floweynice0.png
+      - floweynice1.png
+      - floweyniceside0.png
+      - floweyniceside1.png
+      - floweynicesideum0.png
+      - floweynicesideum1.png
+      - floweysassy0.png
+      - floweysassy1.png
+      - floweyevil0.png
+      - floweyevil1.png
+      - floweygrin0.png
+      - floweygrin1.png
+      - floweylaugh0.png
+      - floweylaugh1.png
+      - floweypissed0.png
+      - floweypissed1.png
+      - floweywink0.png
+      - floweyside0.png
+      - floweysideshock0.png
+      - floweyhurt0.png
+  - name: flowey_battle_b
+    palette: global_palette
+    transparent-index: 14
+    images:
+      - bubble0.png
+      - battleheart0.png
+      - battleheart1.png
+      - battlebullet0.png
+      - battlebullet1.png
+      - winkstar0.png
+      - torielside10.png
+      - torielside11.png
+      - torielcutscene0.png
+      - torielcutscene1.png
+      - torielflame0.png
+      - torielflame1.png
+      - torielflame2.png
+      - torielflame3.png
+      - face_torielhappytalk0.png
+      - face_torielhappytalk1.png
+
+outputs:
+  - type: appvar
+    name: UTFLOW0
+    source-format: c
+    include-file: utflow0.h
+    archived: true
+    palettes:
+      - global_palette
+    converts:
+      - flowey_tiles
+  - type: appvar
+    name: UTFLOW1
+    source-format: c
+    include-file: utflow1.h
+    archived: true
+    palettes:
+      - global_palette
+    converts:
+      - flowey_room_a
+  - type: appvar
+    name: UTFLOW2
+    source-format: c
+    include-file: utflow2.h
+    archived: true
+    palettes:
+      - global_palette
+    converts:
+      - flowey_room_b
+  - type: appvar
+    name: UTFLOW3
+    source-format: c
+    include-file: utflow3.h
+    archived: true
+    palettes:
+      - global_palette
+    converts:
+      - flowey_battle_a
+  - type: appvar
+    name: UTFLOW4
+    source-format: c
+    include-file: utflow4.h
+    archived: true
+    palettes:
+      - global_palette
+    converts:
+      - flowey_battle_b

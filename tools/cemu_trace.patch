@@ -1,0 +1,19 @@
+--- cemu_src/core/cpu.c	2026-09-26 15:22:37
++++ cemu_dbg/core/cpu.c	2026-09-27 14:06:26
+@@ -1,3 +1,5 @@
++#include <stdint.h>
++uint32_t pc_ring[3u<<20]; unsigned pc_ri; static uint32_t pc_last; static uint32_t pc_mark = 0xffffffff; static int pc_marked;
+ /*
+  * Copyright (c) 2014 The KnightOS Group
+  * Modified to support the eZ80 processor by CEmu developers
+@@ -975,6 +977,10 @@
+         }
+         do {
+             /* fetch opcode */
++            { if (pc_mark == 0xffffffff) { const char *e = getenv("PC_MARK"); pc_mark = e ? strtoul(e, 0, 16) : 0xfffffe; }
++  if (r->PC - pc_last > 6) { pc_ring[pc_ri++ % (3u<<20)] = pc_last; pc_ring[pc_ri++ % (3u<<20)] = r->PC | ((uint32_t)(cpu.cycles & 0xff) << 24); pc_ring[pc_ri++ % (3u<<20)] = (uint32_t)cpu.cycles; }
++  pc_last = r->PC;
++  if (r->PC == pc_mark && !pc_marked++) { FILE *fo = fopen("/tmp/pc_ring.txt", "w"); for (unsigned k = 0; k + 3 <= (3u<<20); k += 3) { unsigned j = pc_ri + k; fprintf(fo, "%06x %06x %u\n", pc_ring[j % (3u<<20)], pc_ring[(j+1) % (3u<<20)] & 0xffffff, pc_ring[(j+2) % (3u<<20)]); } fclose(fo); } }
+             context.opcode = cpu_fetch_byte();
+             r->R += 2;
+             switch (context.x) {
